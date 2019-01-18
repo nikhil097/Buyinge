@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.SignUpActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_tv"
+        android:text="Register"
+        android:gravity="center"
+        android:layout_margin="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/email_tv"
+        android:text="Email"
+        android:layout_below="@+id/register_tv"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/email_et"
+        android:layout_below="@id/email_tv"
+        android:layout_margin="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password_tv"
+        android:text="Password"
+        android:layout_below="@+id/email_et"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password_et"
+        android:layout_below="@id/password_tv"
+        android:layout_margin="16dp"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:id="@+id/register_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/password_et"/>
+
+    <Button
+        android:id="@+id/already_sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:background="@null"
+        android:text="Already a user? \nSignin"
+        android:textAllCaps="false"
+        android:layout_below="@+id/register_btn"
+        android:textSize="15dp" />
+</RelativeLayout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.AddProduct">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/selectCategory_tv"
+        android:text="Select Category"
+        android:layout_margin="16dp"/>
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/category_spinner"
+            android:layout_margin="16dp"
+
+            android:layout_below="@+id/selectCategory_tv">
+
+
+        </android.support.v7.widget.AppCompatSpinner>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_tv"
+        android:layout_below="@+id/category_spinner"
+        android:text="Enter title"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_et"
+        android:layout_below="@+id/title_tv"
+        android:hint="Write Something..."
+        android:layout_margin="16dp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/description_tv"
+        android:layout_below="@+id/title_et"
+        android:text="Enter Description"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/description_et"
+        android:layout_below="@+id/description_tv"
+        android:hint="Write Something..."
+        android:layout_margin="16dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/uploadPhoto"
+        android:text="Uplioad photo"
+        android:layout_below="@+id/description_et"
+        android:layout_margin="16dp"
+        />
+    </RelativeLayout>
+
+    </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Product"
+        android:layout_alignParentBottom="true"/>
+
+
+
+</RelativeLayout>

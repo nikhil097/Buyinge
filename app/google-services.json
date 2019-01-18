@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "187700635183",
+    "firebase_url": "https://zerseydemo.firebaseio.com",
+    "project_id": "zerseydemo",
+    "storage_bucket": "zerseydemo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187700635183:android:9f1b7d03ea76ef91",
+        "android_client_info": {
+          "package_name": "fodiee.thenick.com.zerseydemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "187700635183-nrn3fl77vkd5m9l306np847r698rmrhn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fodiee.thenick.com.zerseydemo",
+            "certificate_hash": "3726172eb9b488090f05e884c447527ed6127ae2"
+          }
+        },
+        {
+          "client_id": "187700635183-t7qja1jd8o9phqm5m29uig56p6779tsf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBBdS1z5_JaEj7FCKghadHCCZJBJB-Lj8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "187700635183-t7qja1jd8o9phqm5m29uig56p6779tsf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
