@@ -49,28 +49,47 @@
         android:layout_margin="16dp"/>
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/description_tv"
-        android:layout_below="@+id/title_et"
-        android:text="Enter Description"
-        android:layout_margin="16dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/description_tv"
+            android:layout_below="@+id/title_et"
+            android:text="Enter Description"
+            android:layout_margin="16dp"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/description_et"
-        android:layout_below="@+id/description_tv"
-        android:hint="Write Something..."
-        android:layout_margin="16dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/description_et"
+            android:layout_below="@+id/description_tv"
+            android:hint="Write Something..."
+            android:layout_margin="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/expectedPrice_tv"
+            android:layout_below="@+id/description_et"
+            android:text="Enter Expected Price"
+            android:layout_margin="16dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/expectedPrice_et"
+            android:inputType="number"
+            android:layout_below="@+id/expectedPrice_tv"
+            android:hint="Write Something..."
+            android:layout_margin="16dp"/>
+
+
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/uploadPhoto"
-        android:text="Uplioad photo"
-        android:layout_below="@+id/description_et"
+        android:text="Upload photo"
+        android:layout_below="@+id/expectedPrice_et"
         android:layout_margin="16dp"
         />
     </RelativeLayout>
@@ -80,6 +99,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/addProduct_btn"
         android:text="Add Product"
         android:layout_alignParentBottom="true"/>
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="fodiee.thenick.com.zerseydemo">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,9 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".UI.SignInActivity">
-
-        </activity>
+        <activity android:name=".UI.SignInActivity"></activity>
         <activity android:name=".UI.AddProduct" />
         <activity android:name=".UI.MainActivity" />
         <activity
@@ -28,9 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.SignUpActivity"></activity>
-
-
+        <activity android:name=".UI.SignUpActivity" />
+        <activity android:name=".UI.ProductDetail"></activity>
     </application>
 
 </manifest>

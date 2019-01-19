@@ -2,19 +2,31 @@ package fodiee.thenick.com.zerseydemo.Pojo;
 
 import android.graphics.Bitmap;
 import android.media.Image;
+import android.widget.ScrollView;
+import android.widget.SectionIndexer;
 
-public class Product {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Product implements Serializable {
 
     String category;
     String description;
     String title;
     Bitmap image;
-    String comments;
     String uploadedBy;
     String expectedPrice;
-    Image bitmap;
+    String bitmap;
 
-    public Product(String category,String title,String description,String expectedPrice,String uploadedBy,Image bitmap)
+    ArrayList<String> noOfLikes;
+    ArrayList<String> comments;
+
+    Product(){
+
+    }
+
+
+    public Product(String category,String title,String description,String expectedPrice,String uploadedBy,String bitmap)
     {
         this.category=category;
         this.title=title;
@@ -23,6 +35,32 @@ public class Product {
         this.uploadedBy=uploadedBy;
         this.bitmap=bitmap;
     }
+
+    public String getUploadedBy() {
+        return uploadedBy;
+    }
+
+    public void setUploadedBy(String uploadedBy) {
+        this.uploadedBy = uploadedBy;
+    }
+
+    public String getExpectedPrice() {
+        return expectedPrice;
+    }
+
+    public void setExpectedPrice(String expectedPrice) {
+        this.expectedPrice = expectedPrice;
+    }
+
+    public String getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(String bitmap) {
+        this.bitmap = bitmap;
+    }
+
+
 
     public String getCategory() {
         return category;
@@ -48,20 +86,14 @@ public class Product {
         this.title = title;
     }
 
-    public Bitmap getImage() {
-        return image;
+    public String getImage() {
+        return bitmap;
     }
 
-    public void setImage(Bitmap image) {
-        this.image = image;
+    public void setImage(String image) {
+        this.bitmap = bitmap;
     }
 
-    public String getComments() {
-        return comments;
-    }
 
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
 }
 

@@ -21,4 +21,7 @@
         android:fitsSystemWindows="true"
         app:menu="@menu/activity_home_page_drawer" />
 
+
+
+
 </android.support.v4.widget.DrawerLayout>
