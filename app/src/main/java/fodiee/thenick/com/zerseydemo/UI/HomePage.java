@@ -27,10 +27,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.net.Inet4Address;
 import java.util.ArrayList;
+import java.util.Map;
 
 import fodiee.thenick.com.zerseydemo.Adapter.ItemsAdapter;
 import fodiee.thenick.com.zerseydemo.Pojo.Product;
@@ -130,13 +132,18 @@ public class HomePage extends AppCompatActivity
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Product product=dataSnapshot.getValue(Product.class);
+                product.setProductId(dataSnapshot.getKey());
                 products.add(product);
+
                 Toast.makeText(getApplicationContext(),""+product,Toast.LENGTH_SHORT).show();
                 productsView.setAdapter(new ItemsAdapter(HomePage.this,products));
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+          //      GenericTypeIndicator<Map<String, String>> t = new GenericTypeIndicator<Map<String, String>>() {};
+          //      Map<String, String> map = dataSnapshot.getValue(t);
 
             }
 

@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 Product product=dataSnapshot.getValue(Product.class);
                 if(product.getUploadedBy().equals(auth.getCurrentUser().getEmail())) {
                     myProducts.add(product);
+                    product.setProductId(dataSnapshot.getKey());
                     Toast.makeText(getApplicationContext(), "" + product, Toast.LENGTH_SHORT).show();
                     myProductsView.setAdapter(new ItemsAdapter(MainActivity.this, myProducts));
                 }

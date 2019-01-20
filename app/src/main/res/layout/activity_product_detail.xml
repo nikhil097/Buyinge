@@ -7,59 +7,77 @@
     tools:context=".UI.ProductDetail">
 
     <ScrollView
+        android:id="@+id/contents_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/contents_layout">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_fullView"
-        android:gravity="center"/>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_category_tv"
-        android:layout_below="@+id/product_fullView"
-        android:gravity="center"
-        android:text="\n\nCategory:\n"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_title_tv"
-        android:layout_below="@+id/product_category_tv"
-        android:gravity="center"
-        android:text="\n\nTitle:\n"/>
-
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/product_desciption_tv"
-            android:layout_below="@+id/product_title_tv"
-            android:gravity="center"
-            android:text="\n\nDescription:\n"/>
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/product_fullView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
 
 
+            <TextView
+                android:id="@+id/product_category_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/product_fullView"
+                android:gravity="center"
+                android:text="\n\nCategory:\n" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/product_expectedPrice_tv"
-        android:layout_below="@+id/product_desciption_tv"
-        android:gravity="center"
-        android:text="\n\nExpectedPrice:\n"/>
+            <TextView
+                android:id="@+id/product_title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/product_category_tv"
+                android:gravity="center"
+                android:text="\n\nTitle:\n" />
+
+            <TextView
+                android:id="@+id/product_desciption_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/product_title_tv"
+                android:gravity="center"
+                android:text="\n\nDescription:\n" />
 
 
+            <TextView
+                android:id="@+id/product_expectedPrice_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/product_desciption_tv"
+                android:gravity="center"
+                android:text="\n\nExpectedPrice:\n" />
 
 
-    </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/commentsLvlayout"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@+id/product_expectedPrice_tv">
+
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/commentsLv"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@+id/commentsLvlayout" />
+
+
+        </RelativeLayout>
 
     </ScrollView>
 

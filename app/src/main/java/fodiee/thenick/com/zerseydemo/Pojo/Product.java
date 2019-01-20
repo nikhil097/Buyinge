@@ -5,8 +5,11 @@ import android.media.Image;
 import android.widget.ScrollView;
 import android.widget.SectionIndexer;
 
+import com.google.firebase.database.GenericTypeIndicator;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Product implements Serializable {
 
@@ -18,8 +21,11 @@ public class Product implements Serializable {
     String expectedPrice;
     String bitmap;
 
-    ArrayList<String> noOfLikes;
-    ArrayList<String> comments;
+    String productId;
+    String commentsId;
+
+    HashMap<String,String> noOfLikes;
+    HashMap<String,String> comments;
 
     Product(){
 
@@ -34,6 +40,22 @@ public class Product implements Serializable {
         this.expectedPrice=expectedPrice;
         this.uploadedBy=uploadedBy;
         this.bitmap=bitmap;
+    }
+
+    public String getCommentsId() {
+        return commentsId;
+    }
+
+    public void setCommentsId(String commentsId) {
+        this.commentsId = commentsId;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getUploadedBy() {
