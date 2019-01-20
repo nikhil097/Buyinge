@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,8 @@ public class AddProduct extends AppCompatActivity {
     Bitmap bitmap;
     Uri fileUri;
 
+    ProgressBar addProductBar;
+
     String title,description,imageString;
 
     EditText title_et,description_et,expectedPrice;
@@ -65,6 +68,8 @@ public class AddProduct extends AppCompatActivity {
         expectedPrice=findViewById(R.id.expectedPrice_et);
 
         auth=FirebaseAuth.getInstance();
+
+        addProductBar=findViewById(R.id.addProductProgress);
 
         title_et=findViewById(R.id.title_et);
         description_et=findViewById(R.id.description_et);
@@ -108,6 +113,7 @@ public class AddProduct extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Please upload an image",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    addProductBar.setVisibility(View.VISIBLE);
                     myRef.push().setValue(new Product((String)category_spinner.getSelectedItem(),title_et.getText().toString().trim(),description_et.getText().toString().trim(),expectedPrice.getText().toString().trim(),auth.getCurrentUser().getEmail(),imageString)).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -115,10 +121,12 @@ public class AddProduct extends AppCompatActivity {
                             {
                                 Toast.makeText(getApplicationContext(),"Product Added Successfully",Toast.LENGTH_SHORT).show();
                                 finish();
+
                             }
                             else{
                                 Toast.makeText(getApplicationContext(),"There is some error",Toast.LENGTH_SHORT).show();
                             }
+                            addProductBar.setVisibility(View.GONE);
                         }
                     });
                 }
@@ -148,6 +156,7 @@ public class AddProduct extends AppCompatActivity {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), fileUri);
                 imageString=imageToBase64(bitmap);
+                selectPhoto.setText("Photo Uploaded");
             } catch (IOException e) {
                 e.printStackTrace();
             }

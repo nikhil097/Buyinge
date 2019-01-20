@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button bRegister,bSignin;
     EditText email_et,pwd_et;
 
+    ProgressBar signUpProgress;
 
     FirebaseAuth auth;
 
@@ -39,10 +41,15 @@ public class SignUpActivity extends AppCompatActivity {
         email_et=findViewById(R.id.email_et);
         pwd_et=findViewById(R.id.password_et);
 
+        signUpProgress=findViewById(R.id.signUpProgress);
+
+        getSupportActionBar().setTitle("Sign Up");
 
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                signUpProgress.setVisibility(View.VISIBLE);
 
                 if (email_et.getText().toString().trim().length()>0 && pwd_et.getText().toString().trim().length()>=6)
                 auth.createUserWithEmailAndPassword(email_et.getText().toString().trim(),pwd_et.getText().toString().trim()).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
@@ -58,6 +65,7 @@ public class SignUpActivity extends AppCompatActivity {
                             //              Log.v("usr","pass");
                             Toast.makeText(getApplicationContext(),"Please try again",Toast.LENGTH_SHORT).show();
                         }
+                        signUpProgress.setVisibility(View.GONE);
                     }
                 });
                 else{

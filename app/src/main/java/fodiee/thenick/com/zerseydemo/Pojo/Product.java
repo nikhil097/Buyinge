@@ -24,8 +24,12 @@ public class Product implements Serializable {
     String productId;
     String commentsId;
 
+
+
     HashMap<String,String> noOfLikes;
     HashMap<String,String> comments;
+
+    HashMap<String,Message> replies;
 
     Product(){
 
@@ -40,6 +44,16 @@ public class Product implements Serializable {
         this.expectedPrice=expectedPrice;
         this.uploadedBy=uploadedBy;
         this.bitmap=bitmap;
+    }
+
+
+    public HashMap<String, Message> getReplies(){
+
+        return replies;
+    }
+
+    public void setReplies(HashMap<String, Message> replies) {
+        this.replies = replies;
     }
 
     public String getCommentsId() {

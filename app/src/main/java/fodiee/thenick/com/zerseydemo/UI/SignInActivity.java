@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +26,8 @@ public class SignInActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
 
+    ProgressBar signInProgess;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,9 @@ public class SignInActivity extends AppCompatActivity {
         email_tv=findViewById(R.id.email_et_sign);
         pwd_et=findViewById(R.id.password_et_signin);
 
+        signInProgess=findViewById(R.id.signProgress);
+
+        getSupportActionBar().setTitle("Sign in");
 
         auth =FirebaseAuth.getInstance();
 
@@ -43,6 +49,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                signInProgess.setVisibility(View.VISIBLE);
 
                 if(email_tv.getText().toString().trim().length()>0 && pwd_et.getText().toString().trim().length()>=6)
                 auth.signInWithEmailAndPassword(email_tv.getText().toString().trim(),pwd_et.getText().toString().trim()).addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
@@ -57,6 +64,7 @@ public class SignInActivity extends AppCompatActivity {
                         else{
                             Toast.makeText(SignInActivity.this, "Please try again", Toast.LENGTH_SHORT).show();
                         }
+                        signInProgess.setVisibility(View.GONE);
 
                     }
                 });

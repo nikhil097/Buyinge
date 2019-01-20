@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,9 +46,11 @@ public class HomePage extends AppCompatActivity
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myRef;
 
+
     Button bloginRegister;
     MenuItem addProduct,signOut;
 
+    ProgressBar productsBar;
 
     GridView productsView;
     ArrayList<Product> products;
@@ -64,6 +67,10 @@ public class HomePage extends AppCompatActivity
         myRef=firebaseDatabase.getReference().child("Products");
 
         products=new ArrayList<>();
+
+        getSupportActionBar().setTitle("Home");
+
+        productsBar=findViewById(R.id.lodingProductsBar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -112,7 +119,6 @@ public class HomePage extends AppCompatActivity
         super.onResume();
         if (auth != null) {
             if (auth.getCurrentUser() != null) {
-                Toast.makeText(getApplicationContext(), auth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
                 bloginRegister.setText(auth.getCurrentUser().getEmail());
                 bloginRegister.setEnabled(false);
                 addProduct.setVisible(true);
@@ -134,6 +140,7 @@ public class HomePage extends AppCompatActivity
                 Product product=dataSnapshot.getValue(Product.class);
                 product.setProductId(dataSnapshot.getKey());
                 products.add(product);
+                productsBar.setVisibility(View.GONE);
 
                 Toast.makeText(getApplicationContext(),""+product,Toast.LENGTH_SHORT).show();
                 productsView.setAdapter(new ItemsAdapter(HomePage.this,products));
@@ -189,12 +196,7 @@ public class HomePage extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_page, menu);
-        return true;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -203,10 +205,6 @@ public class HomePage extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

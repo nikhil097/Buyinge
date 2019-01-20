@@ -7,8 +7,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
     FloatingActionButton addProductFAB;
 
+    ProgressBar myProductsBar;
+
     ArrayList<Product> myProducts;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myref;
@@ -43,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         addProductFAB=findViewById(R.id.addProductFloatingButton);
+
+        getSupportActionBar().setTitle("My products");
+
+        myProductsBar=findViewById(R.id.myProductsBar);
 
         addProductFAB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +69,16 @@ public class MainActivity extends AppCompatActivity {
         myProductsView=findViewById(R.id.my_productsView);
         myProductsView.setAdapter(new ItemsAdapter(MainActivity.this,myProducts));
 
+        myProductsView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(MainActivity.this,ProductDetail.class);
+                intent.putExtra("product",myProducts.get(position));
+                startActivity(intent);
+            }
+        });
+
+
         attachDbListener();
     }
 
@@ -72,9 +90,10 @@ public class MainActivity extends AppCompatActivity {
                 if(product.getUploadedBy().equals(auth.getCurrentUser().getEmail())) {
                     myProducts.add(product);
                     product.setProductId(dataSnapshot.getKey());
-                    Toast.makeText(getApplicationContext(), "" + product, Toast.LENGTH_SHORT).show();
                     myProductsView.setAdapter(new ItemsAdapter(MainActivity.this, myProducts));
                 }
+
+                myProductsBar.setVisibility(View.GONE);
             }
 
             @Override

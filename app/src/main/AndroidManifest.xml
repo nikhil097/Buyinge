@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".UI.SignInActivity"></activity>
+        <activity android:name=".UI.SignInActivity" />
         <activity android:name=".UI.AddProduct" />
         <activity android:name=".UI.MainActivity" />
         <activity
@@ -27,7 +27,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".UI.SignUpActivity" />
-        <activity android:name=".UI.ProductDetail"></activity>
+        <activity android:name=".UI.ProductDetail" />
+        <activity android:name=".UI.Main2Activity"></activity>
     </application>
 
 </manifest>

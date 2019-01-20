@@ -1,19 +1,25 @@
 package fodiee.thenick.com.zerseydemo.UI;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
+import android.view.MotionEvent;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,11 +48,20 @@ public class ProductDetail extends AppCompatActivity {
     DatabaseReference myRef;
     FirebaseAuth auth;
 
+    ProgressBar productsDetailBar;
+
     boolean isLiked;
     String path;
 
+    TextView comments_tv;
+
+    int counter=0;
+
+    TextView noOfLikes;
+
     ListView commentsView;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +75,14 @@ public class ProductDetail extends AppCompatActivity {
         productView=findViewById(R.id.product_fullView);
         description_tv=findViewById(R.id.product_desciption_tv);
 
+        noOfLikes=findViewById(R.id.noOfLikes_tv);
+
         commentsView=findViewById(R.id.commentsLv);
+
+        comments_tv=findViewById(R.id.comments_tv);
+
+        productsDetailBar =findViewById(R.id.productDetailBar);
+
 
         comments=new ArrayList<>();
         likes=new ArrayList<>();
@@ -79,6 +101,8 @@ public class ProductDetail extends AppCompatActivity {
         bComment=findViewById(R.id.commentButton);
         bReply =findViewById(R.id.bidButton);
 
+        getSupportActionBar().setTitle("Product Details");
+
 
         bComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +110,7 @@ public class ProductDetail extends AppCompatActivity {
                 bComment.setVisibility(View.GONE);
                 bLike.setVisibility(View.GONE);
                 bReply.setVisibility(View.GONE);
+                noOfLikes.setVisibility(View.GONE);
 
                 bPostComment.setVisibility(View.VISIBLE);
                 comment_et.setVisibility(View.VISIBLE);
@@ -97,35 +122,75 @@ public class ProductDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                myRef.child(product.getProductId()).child("comments").push().setValue(auth.getCurrentUser().getEmail()+": "+comment_et.getText().toString().trim());
+                if(auth.getCurrentUser()==null)
+                {
 
-                comment_et.setText("");
-                comment_et.setVisibility(View.GONE);
-                bPostComment.setVisibility(View.GONE);
-                bComment.setVisibility(View.VISIBLE);
-                bLike.setVisibility(View.VISIBLE);
-                bReply.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(),"Please sign in first.",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if(!TextUtils.isEmpty(comment_et.getText().toString().trim())) {
+                        myRef.child(product.getProductId()).child("comments").push().setValue(auth.getCurrentUser().getEmail() + ": " + comment_et.getText().toString().trim());
 
+                        comment_et.setText("");
+                        comment_et.setVisibility(View.GONE);
+                        bPostComment.setVisibility(View.GONE);
+                        bComment.setVisibility(View.VISIBLE);
+                        bLike.setVisibility(View.VISIBLE);
+                        bReply.setVisibility(View.VISIBLE);
+                        noOfLikes.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Please enter something",Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
         bLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isLiked) {
-                    myRef.child(product.getProductId()).child("likes").push().setValue(auth.getCurrentUser().getEmail());
-                    bLike.setText("Unlike");
 
-
-
+                if(auth.getCurrentUser()==null)
+                {
+                    Toast.makeText(ProductDetail.this, "Please sign in first", Toast.LENGTH_SHORT).show();
                 }
-                else{
+                else {
+                    if (!isLiked) {
+                        myRef.child(product.getProductId()).child("likes").push().setValue(auth.getCurrentUser().getEmail());
+                        bLike.setBackground(getResources().getDrawable(R.drawable.baseline_thumb_up_black_18dp));
+                        //   counter++;
+                    } else {
 
-                    Toast.makeText(getApplicationContext(),path,Toast.LENGTH_SHORT).show();
-                    myRef.child(product.getProductId()).child("likes").child(path).setValue(null);
-                    path=null;
-                    isLiked=false;
-                    bLike.setText("Like");
+                        Toast.makeText(getApplicationContext(), path, Toast.LENGTH_SHORT).show();
+                        myRef.child(product.getProductId()).child("likes").child(path).setValue(null);
+                        path = null;
+                        isLiked = false;
+                        bLike.setBackground(getResources().getDrawable(R.drawable.baseline_thumb_down_black_18dp));
+                        counter--;
+                        noOfLikes.setText(counter + "");
+                    }
+                }
+            }
+        });
+
+        commentsView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+             return false;
+            }
+        });
+
+        bReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(auth.getCurrentUser()==null)
+                {
+                    Toast.makeText(getApplicationContext(),"Please sign in first",Toast.LENGTH_SHORT).show();
+                }
+                else {
+//                    startActivity(new Intent(ProductDetail.this, Main2Activity.class));
                 }
             }
         });
@@ -140,6 +205,23 @@ public class ProductDetail extends AppCompatActivity {
         productView.setImageBitmap(base64ToImage(product.getBitmap()));
         description_tv.setText(description_tv.getText().toString()+product.getDescription());
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                /* Create an Intent that will start the Menu-Activity. */
+
+                productsDetailBar.setVisibility(View.GONE);
+                if (comments.size()==0)
+                {
+                    comments_tv.setText(comments_tv.getText()+"\nNo comments");
+                }
+
+            }
+        }, 20000);
+
+
+
+
     }
 
     @Override
@@ -151,6 +233,7 @@ public class ProductDetail extends AppCompatActivity {
             bComment.setVisibility(View.VISIBLE);
             bLike.setVisibility(View.VISIBLE);
             bReply.setVisibility(View.VISIBLE);
+            noOfLikes.setVisibility(View.VISIBLE);
         }
         else{
             super.onBackPressed();
@@ -168,6 +251,8 @@ public class ProductDetail extends AppCompatActivity {
 
 
                 String comment=dataSnapshot.getValue(String.class);
+
+                productsDetailBar.setVisibility(View.GONE);
 
                 comments.add(comment);
                 commentsView.setAdapter(new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,comments));
@@ -198,24 +283,33 @@ public class ProductDetail extends AppCompatActivity {
         myRef.child(product.getProductId()).child("likes").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String likedBy=dataSnapshot.getValue(String.class);
-                if(likedBy.equals(product.getUploadedBy()))
-                {
-                    isLiked=true;
-                    bLike.setText("Unlike");
-                    path=dataSnapshot.getKey();
-                }
 
+                if(auth.getCurrentUser()!=null) {
+                    counter++;
+
+                    noOfLikes.setText(counter + " ");
+
+                    String likedBy = dataSnapshot.getValue(String.class);
+                    if (likedBy.equals(auth.getCurrentUser().getEmail())) {
+                        isLiked = true;
+                        bLike.setBackground(getResources().getDrawable(R.drawable.baseline_thumb_up_black_18dp));
+                        path = dataSnapshot.getKey();
+                    }
+                }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+                counter++;
+
+                noOfLikes.setText(counter);
+
                 String likedBy=dataSnapshot.getValue(String.class);
-                if(likedBy.equals(product.getUploadedBy()))
+                if(likedBy.equals(auth.getCurrentUser().getEmail()))
                 {
                     isLiked=true;
-                    bLike.setText("Liked");
+                    bLike.setBackground(getResources().getDrawable(R.drawable.baseline_thumb_up_black_18dp));
                     path=dataSnapshot.getKey();
                 }
 
