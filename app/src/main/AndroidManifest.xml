@@ -29,7 +29,8 @@
         <activity android:name=".UI.SignUpActivity" />
         <activity android:name=".UI.ProductDetail" />
         <activity android:name=".UI.Main2Activity" />
-        <activity android:name=".UI.SigniN"></activity>
+        <activity android:name=".UI.SigniN" />
+        <activity android:name=".UI.NameDetailsEnter"></activity>
     </application>
 
 </manifest>

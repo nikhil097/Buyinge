@@ -1,6 +1,7 @@
 package fodiee.thenick.com.zerseydemo.UI;
 
 import android.content.Intent;
+import android.os.NetworkOnMainThreadException;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+import java.util.jar.Attributes;
 
 import fodiee.thenick.com.zerseydemo.R;
 
@@ -96,10 +98,15 @@ public class SigniN extends AppCompatActivity {
 
 
 
-                            Intent intent = new Intent(SigniN.this, HomePage.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
+                            if(auth.getCurrentUser().getDisplayName()!=null) {
 
+                                Intent intent = new Intent(SigniN.this, HomePage.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+                            else {
+                                startActivity(new Intent(SigniN.this,NameDetailsEnter.class));
+                            }
                         } else {
 
                             //verification unsuccessful.. display an error message
