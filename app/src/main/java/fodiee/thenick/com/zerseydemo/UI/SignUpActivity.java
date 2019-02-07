@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import fodiee.thenick.com.zerseydemo.R;
 
@@ -23,7 +25,7 @@ import fodiee.thenick.com.zerseydemo.R;
 public class SignUpActivity extends AppCompatActivity {
 
     Button bRegister,bSignin;
-    EditText email_et,pwd_et;
+    EditText email_et,pwd_et,displayNmae_et;
 
     ProgressBar signUpProgress;
 
@@ -41,6 +43,8 @@ public class SignUpActivity extends AppCompatActivity {
         email_et=findViewById(R.id.email_et);
         pwd_et=findViewById(R.id.password_et);
 
+        displayNmae_et=findViewById(R.id.displayNameEt);
+
         signUpProgress=findViewById(R.id.signUpProgress);
 
         getSupportActionBar().setTitle("Sign Up");
@@ -51,14 +55,36 @@ public class SignUpActivity extends AppCompatActivity {
 
                 signUpProgress.setVisibility(View.VISIBLE);
 
-                if (email_et.getText().toString().trim().length()>0 && pwd_et.getText().toString().trim().length()>=6)
+                if (email_et.getText().toString().trim().length()>0 && pwd_et.getText().toString().trim().length()>=6 && displayNmae_et.getText().toString().trim().length()>=1)
                 auth.createUserWithEmailAndPassword(email_et.getText().toString().trim(),pwd_et.getText().toString().trim()).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
-                            Toast.makeText(getApplicationContext(),"SignUpActivity successful",Toast.LENGTH_SHORT).show();
-                            finish();
+                            FirebaseUser user = auth.getCurrentUser();
+
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(displayNmae_et.getText().toString().trim()).build();
+
+                            user.updateProfile(profileUpdates);
+
+                            user.sendEmailVerification()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("hi", "Email sent.");
+                                                auth.signOut();
+                                                finish();
+                                                Toast.makeText(SignUpActivity.this, "Email regarding verification sent to your registered email address.Confirm the email and signin", Toast.LENGTH_SHORT).show();
+                                            }
+                                            else{
+                                                Toast.makeText(SignUpActivity.this, "Problem in sending verification email", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+
+               //             Toast.makeText(getApplicationContext(),"SignUpActivity successful",Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
@@ -68,9 +94,17 @@ public class SignUpActivity extends AppCompatActivity {
                         signUpProgress.setVisibility(View.GONE);
                     }
                 });
+                else if(displayNmae_et.getText().toString().trim().length()<1)
+                {
+                    Toast.makeText(SignUpActivity.this, "Provide valid display name", Toast.LENGTH_SHORT).show();
+                    signUpProgress.setVisibility(View.GONE);
+
+                }
                 else{
+                    signUpProgress.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Please enter valid email and password", Toast.LENGTH_SHORT).show();
                 }
+
 
             }
         });

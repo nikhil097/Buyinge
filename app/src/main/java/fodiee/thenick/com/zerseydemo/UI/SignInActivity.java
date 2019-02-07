@@ -21,7 +21,7 @@ import fodiee.thenick.com.zerseydemo.R;
 public class SignInActivity extends AppCompatActivity {
 
 
-    Button bSign,bRegister;
+    Button bSign,bRegister,bMobileSign;
     EditText email_tv,pwd_et;
 
     FirebaseAuth auth;
@@ -38,6 +38,7 @@ public class SignInActivity extends AppCompatActivity {
 
         email_tv=findViewById(R.id.email_et_sign);
         pwd_et=findViewById(R.id.password_et_signin);
+        bMobileSign=findViewById(R.id.mobileSignIn_btn);
 
         signInProgess=findViewById(R.id.signProgress);
 
@@ -58,8 +59,16 @@ public class SignInActivity extends AppCompatActivity {
 
                         if(task.isSuccessful())
                         {
+                            if(auth.getCurrentUser().isEmailVerified())
+                            {
                             Toast.makeText(getApplicationContext(),"SignIn Successful",Toast.LENGTH_SHORT).show();
                             finish();
+                            }
+                            else{
+                                auth.signOut();
+                                Toast.makeText(SignInActivity.this, "Verify your email first.", Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                         else{
                             Toast.makeText(SignInActivity.this, "Please try again", Toast.LENGTH_SHORT).show();
@@ -83,6 +92,12 @@ public class SignInActivity extends AppCompatActivity {
         });
 
 
+        bMobileSign.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View v) {
+                                               startActivity(new Intent(SignInActivity.this,SigniN.class));
+                                           }
+                                       });
 
 
 

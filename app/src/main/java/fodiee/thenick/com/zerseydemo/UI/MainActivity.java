@@ -87,7 +87,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Product product=dataSnapshot.getValue(Product.class);
-                if(product.getUploadedBy().equals(auth.getCurrentUser().getEmail())) {
+                String uploadedBy=auth.getCurrentUser().getEmail();
+                if(uploadedBy==null)
+                {
+                    uploadedBy=auth.getCurrentUser().getPhoneNumber();
+                }
+                else if(uploadedBy.equals(""))
+                {
+                    uploadedBy=auth.getCurrentUser().getPhoneNumber();
+                }
+                if(product.getUploadedBy().equals(uploadedBy)) {
                     myProducts.add(product);
                     product.setProductId(dataSnapshot.getKey());
                     myProductsView.setAdapter(new ItemsAdapter(MainActivity.this, myProducts));

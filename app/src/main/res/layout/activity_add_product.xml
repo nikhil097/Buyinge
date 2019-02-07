@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".UI.AddProduct">
 
     <ProgressBar
@@ -33,6 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/category_spinner"
+            android:background="@drawable/background"
             android:layout_margin="16dp"
 
             android:layout_below="@+id/selectCategory_tv">
@@ -54,7 +56,9 @@
         android:id="@+id/title_et"
         android:layout_below="@+id/title_tv"
         android:hint="Write Something..."
-        android:layout_margin="16dp"/>
+        android:padding="15dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/background"/>
 
 
         <TextView
@@ -67,10 +71,12 @@
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:id="@+id/description_et"
             android:layout_below="@+id/description_tv"
             android:hint="Write Something..."
+            android:gravity="top"
+            android:background="@drawable/background"
             android:layout_margin="16dp"/>
 
         <TextView
@@ -88,6 +94,8 @@
             android:inputType="number"
             android:layout_below="@+id/expectedPrice_tv"
             android:hint="Write Something..."
+            android:padding="15dp"
+            android:background="@drawable/background"
             android:layout_margin="16dp"/>
 
 
@@ -97,19 +105,30 @@
         android:layout_height="wrap_content"
         android:id="@+id/uploadPhoto"
         android:text="Upload photo"
+        android:background="@drawable/user_background"
+        android:textColor="@android:color/white"
         android:layout_below="@+id/expectedPrice_et"
         android:layout_margin="16dp"
         />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/uploadPhoto"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/addProduct_btn"
+            android:background="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            android:text="Add Product"
+            android:layout_alignParentBottom="true"/>
+
     </RelativeLayout>
 
     </ScrollView>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/addProduct_btn"
-        android:text="Add Product"
-        android:layout_alignParentBottom="true"/>
 
 
 

@@ -1,6 +1,8 @@
 package fodiee.thenick.com.zerseydemo.UI;
 
 import android.animation.TimeAnimator;
+import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,13 +11,16 @@ import android.os.FileUriExposedException;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,10 +29,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnPausedListener;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -45,9 +57,13 @@ public class AddProduct extends AppCompatActivity {
     Bitmap bitmap;
     Uri fileUri;
 
+    StorageReference storageReference;
+
     ProgressBar addProductBar;
 
-    String title,description,imageString;
+    ProgressDialog progressDialog;
+
+    String title,description,imageString,imgUrl;
 
     EditText title_et,description_et,expectedPrice;
 
@@ -68,6 +84,10 @@ public class AddProduct extends AppCompatActivity {
         expectedPrice=findViewById(R.id.expectedPrice_et);
 
         auth=FirebaseAuth.getInstance();
+
+        progressDialog=new ProgressDialog(this);
+
+        storageReference=FirebaseStorage.getInstance().getReference().child("images");
 
         addProductBar=findViewById(R.id.addProductProgress);
 
@@ -100,21 +120,34 @@ public class AddProduct extends AppCompatActivity {
         bAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(title_et.getText().toString()))
+                if(TextUtils.isEmpty(title_et.getText().toString().trim()))
                 {
                     Toast.makeText(getApplicationContext(),"Please enter title",Toast.LENGTH_SHORT).show();
                 }
-                else if(TextUtils.isEmpty(description_et.getText().toString()))
+                else if(TextUtils.isEmpty(description_et.getText().toString().trim()))
                 {
                     Toast.makeText(getApplicationContext(),"Please enter some description",Toast.LENGTH_SHORT).show();
                 }
-                else if(TextUtils.isEmpty(imageString))
+                else if(TextUtils.isEmpty(imgUrl))
                 {
                     Toast.makeText(getApplicationContext(),"Please upload an image",Toast.LENGTH_SHORT).show();
                 }
+                else if(TextUtils.isEmpty(expectedPrice.getText().toString().trim()))
+                {
+                    Toast.makeText(AddProduct.this,"Please enter expected price",Toast.LENGTH_SHORT).show();
+                }
                 else{
                     addProductBar.setVisibility(View.VISIBLE);
-                    myRef.push().setValue(new Product((String)category_spinner.getSelectedItem(),title_et.getText().toString().trim(),description_et.getText().toString().trim(),expectedPrice.getText().toString().trim(),auth.getCurrentUser().getEmail(),imageString)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    String uploadedBy=auth.getCurrentUser().getEmail();
+                    if(uploadedBy==null)
+                    {
+                        uploadedBy=auth.getCurrentUser().getPhoneNumber();
+                    }
+                    else if(uploadedBy.equals(""))
+                    {
+                        uploadedBy=auth.getCurrentUser().getPhoneNumber();
+                    }
+                    myRef.push().setValue(new Product((String)category_spinner.getSelectedItem(),title_et.getText().toString().trim(),description_et.getText().toString().trim(),expectedPrice.getText().toString().trim(),uploadedBy,imgUrl)).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful())
@@ -156,6 +189,7 @@ public class AddProduct extends AppCompatActivity {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), fileUri);
                 imageString=imageToBase64(bitmap);
+                uploadFile();
                 selectPhoto.setText("Photo Uploaded");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -163,6 +197,95 @@ public class AddProduct extends AppCompatActivity {
         }
 
     }
+
+
+    private void uploadFile() {
+        if (fileUri != null) {
+
+            String fileName = fileUri.getLastPathSegment();
+            if (!validateInputFileName(fileName)) {
+                return;
+            }
+
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            progressDialog.setCancelable(false);
+
+            final StorageReference fileRef = storageReference.child(fileName + "." + getFileExtension(fileUri));
+            fileRef.putFile(fileUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+
+//                            Log.e(TAG, "Uri: " + taskSnapshot.getDownloadUrl());
+                            Log.e("tag1", "Name: " + taskSnapshot.getMetadata().getName());
+
+
+                            fileUri = null;
+                            fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    imgUrl = uri.toString();
+                                    //                 Log.d("IURI", imgUrl1);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("IURI", e.toString());
+                                }
+                            });
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            progressDialog.dismiss();
+
+                            Toast.makeText(AddProduct.this, exception.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            // progress percentage
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+
+                            // percentage in progress dialog
+                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                        }
+                    })
+                    .addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
+                            System.out.println("Upload is paused!");
+                        }
+                    });
+        } else {
+            Toast.makeText(AddProduct.this, "No File! Please select Image", Toast.LENGTH_LONG).show();
+
+        }
+
+
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+    private boolean validateInputFileName(String fileName) {
+
+        if (TextUtils.isEmpty(fileName)) {
+            Toast.makeText(AddProduct.this, "Enter file name!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
 
     public String imageToBase64(Bitmap bm)
     {

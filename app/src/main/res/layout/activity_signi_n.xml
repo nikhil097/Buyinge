@@ -5,100 +5,96 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".UI.SignInActivity">
+    tools:context=".UI.SigniN">
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <ProgressBar
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:visibility="gone"
-        android:id="@+id/signProgress"
+        android:id="@+id/signProgressMobile"
         android:layout_centerInParent="true"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sign_in_button_tv"
+        android:id="@+id/sign_in_button_tv_mobile"
         android:text="Sign In"
+        android:textSize="30dp"
         android:gravity="center"
-        android:textSize="30sp"
         android:layout_margin="16dp"/>
+
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/email_tv_signin"
-        android:text="Email"
-        android:layout_below="@id/sign_in_button_tv"
+        android:id="@+id/email_tv_signin_mobile"
+        android:text="Mobile Number"
+        android:layout_below="@id/sign_in_button_tv_mobile"
         android:layout_margin="16dp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/email_et_sign"
+        android:id="@+id/email_et_sign_mobile"
         android:background="@drawable/background"
-        android:hint="Enter your email"
+        android:hint="Enter your number"
         android:padding="15dp"
-        android:layout_below="@id/email_tv_signin"
+        android:inputType="number"
+        android:layout_below="@id/email_tv_signin_mobile"
         android:layout_margin="16dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/password_tv_signin"
-        android:text="Password"
-        android:layout_below="@+id/email_et_sign"
-        android:layout_margin="16dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/password_et_signin"
-        android:hint="Enter your password"
-        android:padding="15dp"
-        android:background="@drawable/background"
-        android:layout_below="@id/password_tv_signin"
-        android:layout_margin="16dp"/>
-
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sign In"
+        android:text="Send OTP"
         android:layout_margin="16dp"
         android:background="@drawable/user_background"
         android:textColor="@android:color/white"
-        android:id="@+id/sign_in_btn"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/password_et_signin"/>
+        android:id="@+id/sendOtpButton_mobile"
+        android:layout_below="@+id/email_et_sign_mobile"
+        android:layout_centerHorizontal="true"/>
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/sign_in_btn">
+        android:layout_height="wrap_content"
+        android:id="@+id/password_tv_signin_mobile"
+        android:text="OTP"
+        android:layout_below="@+id/sendOtpButton_mobile"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/password_et_signin_mobile"
+        android:hint="Enter received OTP"
+        android:padding="15dp"
+        android:background="@drawable/background"
+        android:layout_below="@id/password_tv_signin_mobile"
+        android:layout_margin="16dp"/>
+
 
     <Button
-        android:id="@+id/already_sign_up_button"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_margin="16dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
-        android:background="@null"
-        android:text="New user? \nRegister"
-        android:textAllCaps="false"
-        android:textSize="15dp" />
+        android:text="Sign In"
+        android:background="@drawable/user_background"
+        android:textColor="@android:color/white"
+        android:id="@+id/sign_in_btn_mobile"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/password_et_signin_mobile"/>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:id="@+id/mobileSignIn_btn"
-            android:textAllCaps="false"
-            android:layout_marginTop="20dip"
-            android:text="Sign In \nusing\n Mobile Number"/>
+</RelativeLayout>
 
-    </LinearLayout>
-
-
+    </ScrollView>
 
 </RelativeLayout>

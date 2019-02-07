@@ -11,8 +11,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.security.BasicPermission;
 import java.util.ArrayList;
+
+import javax.microedition.khronos.opengles.GL;
 
 import fodiee.thenick.com.zerseydemo.Pojo.Product;
 import fodiee.thenick.com.zerseydemo.R;
@@ -51,7 +55,13 @@ public class ItemsAdapter extends BaseAdapter {
         imagePreview=convertView.findViewById(R.id.product_preview);
         titlePreview=convertView.findViewById(R.id.title_preview);
         titlePreview.setText(products.get(position).getTitle());
-        imagePreview.setImageBitmap(base64ToImage(products.get(position).getBitmap()));
+
+        Glide.with(mContext)
+                .load(products.get(position).getBitmap())
+                .into(imagePreview);
+
+
+//        imagePreview.setImageBitmap(base64ToImage(products.get(position).getBitmap()));
         return convertView;
     }
 

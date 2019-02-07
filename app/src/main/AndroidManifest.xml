@@ -28,7 +28,8 @@
         </activity>
         <activity android:name=".UI.SignUpActivity" />
         <activity android:name=".UI.ProductDetail" />
-        <activity android:name=".UI.Main2Activity"></activity>
+        <activity android:name=".UI.Main2Activity" />
+        <activity android:name=".UI.SigniN"></activity>
     </application>
 
 </manifest>

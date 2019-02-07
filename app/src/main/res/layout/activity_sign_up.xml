@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context=".UI.SignUpActivity">
 
     <ProgressBar
@@ -13,26 +14,52 @@
         android:visibility="gone"
         android:id="@+id/signUpProgress"/>
 
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/register_tv"
         android:text="Register"
+        android:textSize="30sp"
         android:gravity="center"
         android:layout_margin="16dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/email_tv"
-        android:text="Email"
+        android:id="@+id/displayName_tv"
+        android:text="Display Name"
         android:layout_below="@+id/register_tv"
         android:layout_margin="16dp"/>
 
     <EditText
         android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/displayNameEt"
+        android:layout_margin="16dp"
+        android:lines="1"
+        android:background="@drawable/background"
+        android:layout_below="@+id/displayName_tv"/>
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/email_tv"
+        android:text="Email"
+        android:layout_below="@+id/displayNameEt"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:id="@+id/email_et"
+        android:lines="1"
+        android:background="@drawable/background"
         android:layout_below="@id/email_tv"
         android:layout_margin="16dp"/>
 
@@ -46,16 +73,21 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:id="@+id/password_et"
+        android:lines="1"
+        android:background="@drawable/background"
         android:layout_below="@id/password_tv"
         android:layout_margin="16dp"/>
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
+        android:layout_margin="16dp"
+        android:background="@drawable/user_background"
+        android:textColor="@android:color/white"
         android:id="@+id/register_btn"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/password_et"/>
@@ -70,4 +102,7 @@
         android:textAllCaps="false"
         android:layout_below="@+id/register_btn"
         android:textSize="15dp" />
+
+</RelativeLayout>
+</ScrollView>
 </RelativeLayout>
