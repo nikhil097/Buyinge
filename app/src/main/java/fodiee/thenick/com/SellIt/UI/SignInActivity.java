@@ -1,4 +1,4 @@
-package fodiee.thenick.com.zerseydemo.UI;
+package fodiee.thenick.com.SellIt.UI;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -15,7 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import fodiee.thenick.com.zerseydemo.R;
+import fodiee.thenick.com.SellIt.R;
 
 
 public class SignInActivity extends AppCompatActivity {
@@ -42,7 +42,7 @@ public class SignInActivity extends AppCompatActivity {
 
         signInProgess=findViewById(R.id.signProgress);
 
-        getSupportActionBar().setTitle("Sign in");
+//        getSupportActionBar().setTitle("Sign in");
 
         auth =FirebaseAuth.getInstance();
 

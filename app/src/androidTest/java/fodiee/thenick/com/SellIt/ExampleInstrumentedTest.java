@@ -1,4 +1,4 @@
-package fodiee.thenick.com.zerseydemo;
+package fodiee.thenick.com.SellIt;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

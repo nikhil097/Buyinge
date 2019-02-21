@@ -1,14 +1,8 @@
-package fodiee.thenick.com.zerseydemo.Pojo;
+package fodiee.thenick.com.SellIt.Pojo;
 
 import android.graphics.Bitmap;
-import android.media.Image;
-import android.widget.ScrollView;
-import android.widget.SectionIndexer;
-
-import com.google.firebase.database.GenericTypeIndicator;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Product implements Serializable {

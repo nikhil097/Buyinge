@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/app_background"
     tools:context=".UI.SigniN">
 
 
@@ -22,11 +22,18 @@
         android:id="@+id/signProgressMobile"
         android:layout_centerInParent="true"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/topSpaceView"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/sign_in_button_tv_mobile"
-        android:text="Sign In"
+        android:text="SIGN IN"
+        android:layout_below="@id/topSpaceView"
+        android:textColor="@android:color/white"
         android:textSize="30dp"
         android:gravity="center"
         android:layout_margin="16dp"/>
@@ -38,6 +45,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/email_tv_signin_mobile"
         android:text="Mobile Number"
+        android:textColor="@android:color/white"
         android:layout_below="@id/sign_in_button_tv_mobile"
         android:layout_margin="16dp"/>
 
@@ -57,7 +65,7 @@
         android:layout_height="wrap_content"
         android:text="Send OTP"
         android:layout_margin="16dp"
-        android:background="@drawable/user_background"
+        android:background="#50FFFFFF"
         android:textColor="@android:color/white"
         android:id="@+id/sendOtpButton_mobile"
         android:layout_below="@+id/email_et_sign_mobile"
@@ -68,6 +76,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/password_tv_signin_mobile"
         android:text="OTP"
+        android:textColor="@android:color/white"
         android:layout_below="@+id/sendOtpButton_mobile"
         android:layout_margin="16dp"/>
 
@@ -87,7 +96,7 @@
         android:layout_margin="16dp"
         android:layout_height="wrap_content"
         android:text="Sign In"
-        android:background="@drawable/user_background"
+        android:background="#50ffffff"
         android:textColor="@android:color/white"
         android:id="@+id/sign_in_btn_mobile"
         android:layout_centerHorizontal="true"

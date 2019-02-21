@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">ZerseyDemo</string>
+    <string name="app_name">buyinge</string>
 
     <string-array name="category_array">
         <item>Tv</item>
         <item>Mobile</item>
         <item>Vehicle</item>
     </string-array>
-    <string name="title_activity_home_page">HomePage</string>
+    <string name="title_activity_home_page">buyinge</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>

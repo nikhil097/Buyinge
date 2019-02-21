@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="fodiee.thenick.com.zerseydemo">
+    package="fodiee.thenick.com.SellIt">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".UI.SignInActivity" />
-        <activity android:name=".UI.AddProduct" />
-        <activity android:name=".UI.MainActivity" />
+        <activity android:name="fodiee.thenick.com.SellIt.UI.SignInActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="fodiee.thenick.com.SellIt.UI.AddProduct"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="fodiee.thenick.com.SellIt.UI.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".UI.HomePage"
+            android:name="fodiee.thenick.com.SellIt.UI.HomePage"
             android:label="@string/title_activity_home_page"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,11 +32,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.SignUpActivity" />
-        <activity android:name=".UI.ProductDetail" />
-        <activity android:name=".UI.Main2Activity" />
-        <activity android:name=".UI.SigniN" />
-        <activity android:name=".UI.NameDetailsEnter"></activity>
+        <activity android:name="fodiee.thenick.com.SellIt.UI.SignUpActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="fodiee.thenick.com.SellIt.UI.ProductDetail"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="fodiee.thenick.com.SellIt.UI.Main2Activity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="fodiee.thenick.com.SellIt.UI.SigniN"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="fodiee.thenick.com.SellIt.UI.NameDetailsEnter"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

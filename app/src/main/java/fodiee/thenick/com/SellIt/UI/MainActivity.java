@@ -1,4 +1,4 @@
-package fodiee.thenick.com.zerseydemo.UI;
+package fodiee.thenick.com.SellIt.UI;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -22,9 +20,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-import fodiee.thenick.com.zerseydemo.Adapter.ItemsAdapter;
-import fodiee.thenick.com.zerseydemo.Pojo.Product;
-import fodiee.thenick.com.zerseydemo.R;
+import fodiee.thenick.com.SellIt.Adapter.ItemsAdapter;
+import fodiee.thenick.com.SellIt.Pojo.Product;
+import fodiee.thenick.com.SellIt.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         addProductFAB=findViewById(R.id.addProductFloatingButton);
 
-        getSupportActionBar().setTitle("My products");
+   //     getSupportActionBar().setTitle("My products");
 
         myProductsBar=findViewById(R.id.myProductsBar);
 

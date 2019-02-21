@@ -1,7 +1,6 @@
-package fodiee.thenick.com.zerseydemo.UI;
+package fodiee.thenick.com.SellIt.UI;
 
 import android.content.Intent;
-import android.content.pm.SigningInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,8 +17,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.FirebaseDatabase;
 
-import fodiee.thenick.com.zerseydemo.R;
+import fodiee.thenick.com.SellIt.Pojo.User;
+import fodiee.thenick.com.SellIt.R;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -29,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     ProgressBar signUpProgress;
 
+    FirebaseDatabase firebasedb;
     FirebaseAuth auth;
 
     @Override
@@ -43,11 +45,13 @@ public class SignUpActivity extends AppCompatActivity {
         email_et=findViewById(R.id.email_et);
         pwd_et=findViewById(R.id.password_et);
 
+        firebasedb=FirebaseDatabase.getInstance();
+
         displayNmae_et=findViewById(R.id.displayNameEt);
 
         signUpProgress=findViewById(R.id.signUpProgress);
 
-        getSupportActionBar().setTitle("Sign Up");
+    //    getSupportActionBar().setTitle("Sign Up");
 
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +81,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                 auth.signOut();
                                                 finish();
                                                 Toast.makeText(SignUpActivity.this, "Email regarding verification sent to your registered email address.Confirm the email and signin", Toast.LENGTH_SHORT).show();
+                                        //        firebasedb.getReference().child("Users").child(email_et.getText().toString().trim()).setValue(new User(displayNmae_et.getText().toString().trim(),null));
                                             }
                                             else{
                                                 Toast.makeText(SignUpActivity.this, "Problem in sending verification email", Toast.LENGTH_SHORT).show();

@@ -1,13 +1,11 @@
-package fodiee.thenick.com.zerseydemo.UI;
+package fodiee.thenick.com.SellIt.UI;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -17,10 +15,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-import fodiee.thenick.com.zerseydemo.Adapter.ItemsAdapter;
-import fodiee.thenick.com.zerseydemo.Pojo.Message;
-import fodiee.thenick.com.zerseydemo.Pojo.Product;
-import fodiee.thenick.com.zerseydemo.R;
+import fodiee.thenick.com.SellIt.Pojo.Message;
+import fodiee.thenick.com.SellIt.Pojo.Product;
+import fodiee.thenick.com.SellIt.R;
 
 public class Main2Activity extends AppCompatActivity {
 

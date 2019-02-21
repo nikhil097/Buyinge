@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_background"
+    tools:context=".UI.NameDetailsEnter">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/userName_et"
+        android:textColor="@android:color/white"
+        android:text="Name"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your name"
+        android:id="@+id/userName_et"
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:background="#FFFFFF"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:id="@+id/registerMobileUser_btn"
+        android:layout_margin="16dp"
+        android:background="#50FFFFFF"
+        android:layout_below="@+id/userName_et"
+        android:textColor="@android:color/white"/>
+
+</RelativeLayout>

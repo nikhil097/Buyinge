@@ -1,4 +1,4 @@
-package fodiee.thenick.com.zerseydemo.Pojo;
+package fodiee.thenick.com.SellIt.Pojo;
 
 public class Message
 {

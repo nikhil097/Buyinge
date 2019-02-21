@@ -28,6 +28,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.5'
     implementation 'com.google.firebase:firebase-storage:16.0.5'
     testImplementation 'junit:junit:4.12'
+    implementation 'id.zelory:compressor:2.1.0'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'

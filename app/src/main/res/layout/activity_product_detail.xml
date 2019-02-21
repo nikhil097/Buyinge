@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/colorPrimary"
     tools:context=".UI.ProductDetail"
-    android:background="#e5e5e5">
+    android:background="@drawable/app_background">
 
     <ProgressBar
         android:layout_width="100dp"
@@ -25,21 +24,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:id="@+id/topSpaceView"/>
+
             <ImageView
                 android:id="@+id/product_fullView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="20dp"
+                android:layout_below="@+id/topSpaceView"
                 android:gravity="center" />
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="50dp"
                 android:id="@+id/categoryCard"
                 android:layout_margin="16dp"
                 android:layout_below="@+id/product_fullView"
-                app:cardBackgroundColor="@android:color/darker_gray">
+                app:cardBackgroundColor="#50ffffff">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -54,6 +58,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_margin="16dp"
+                android:textColor="@android:color/white"
                 android:text="Category:" />
 
             <TextView
@@ -75,8 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/categoryCard"
                 android:id="@+id/titleCard"
-                app:cardElevation="50dp"
-                app:cardBackgroundColor="@android:color/darker_gray"
+                app:cardBackgroundColor="#50ffffff"
                 android:layout_margin="16dp">
 
                 <LinearLayout
@@ -90,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/product_category_et"
                 android:textStyle="bold"
+                android:textColor="@android:color/white"
                 android:layout_margin="16dp"
                 android:textSize="20sp"
                 android:text="Title:" />
@@ -112,8 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:cardElevation="50dp"
-                app:cardBackgroundColor="@android:color/darker_gray"
+                app:cardBackgroundColor="#50ffffff"
                 android:id="@+id/descriptionCard"
                 android:layout_below="@+id/titleCard">
 
@@ -128,6 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/product_title_et"
                 android:layout_margin="16dp"
+                android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:text="Description:" />
@@ -149,8 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/expectedPriceCard"
-                app:cardElevation="50dp"
-                app:cardBackgroundColor="@android:color/darker_gray"
+                app:cardBackgroundColor="#50ffffff"
                 android:layout_below="@+id/descriptionCard"
                 android:layout_margin="16dp">
 
@@ -167,6 +171,7 @@
                 android:textSize="20sp"
                 android:layout_below="@+id/product_desciption_et"
                 android:layout_margin="16dp"
+                android:textColor="@android:color/white"
                 android:text="ExpectedPrice:" />
 
             <TextView
@@ -188,9 +193,8 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:id="@+id/commentsCard"
-               app:cardElevation="50dp"
                android:layout_margin="16dp"
-               app:cardBackgroundColor="@android:color/darker_gray"
+               app:cardBackgroundColor="#50ffffff"
                android:layout_below="@+id/expectedPriceCard">
 
             <LinearLayout
@@ -208,6 +212,7 @@
                     android:id="@+id/comments_tv"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    android:textColor="@android:color/white"
                     android:layout_margin="16dp"/>
 
                 <ListView
@@ -229,11 +234,18 @@
 
     </ScrollView>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/extraView1"
+        android:layout_alignParentBottom="true"
+        />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@drawable/background"
-        android:layout_alignParentBottom="true">
+        android:layout_above="@+id/extraView1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -312,6 +324,13 @@
             android:layout_height="match_parent" />
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/extraView"
+            android:layout_below="@id/commentPostLayout"
+            />
 
     </RelativeLayout>
 

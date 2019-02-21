@@ -1,7 +1,6 @@
-package fodiee.thenick.com.zerseydemo.UI;
+package fodiee.thenick.com.SellIt.UI;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
@@ -9,11 +8,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,13 +33,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.like.IconType;
 import com.like.LikeButton;
 
 import java.util.ArrayList;
 
-import fodiee.thenick.com.zerseydemo.Pojo.Product;
-import fodiee.thenick.com.zerseydemo.R;
+import fodiee.thenick.com.SellIt.Pojo.Product;
+import fodiee.thenick.com.SellIt.R;
 
 public class ProductDetail extends AppCompatActivity {
 
@@ -110,7 +107,7 @@ public class ProductDetail extends AppCompatActivity {
         comments=new ArrayList<>();
         likes=new ArrayList<>();
 
-        commentsView.setAdapter(new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,comments));
+  //      commentsView.setAdapter(new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,comments));
 
         firebase=FirebaseDatabase.getInstance();
         myRef=firebase.getReference().child("Products");
@@ -124,7 +121,7 @@ public class ProductDetail extends AppCompatActivity {
         bComment=findViewById(R.id.commentButton);
         bReply =findViewById(R.id.bidButton);
 
-        getSupportActionBar().setTitle("Product Details");
+     //   getSupportActionBar().setTitle("Product Details");
 
 
         bComment.setOnClickListener(new View.OnClickListener() {
@@ -307,10 +304,11 @@ public class ProductDetail extends AppCompatActivity {
 
                 productsDetailBar.setVisibility(View.GONE);
 
-                comments_tv.setText("\n\nComments\n");
+                comments_tv.setText("Comments\n");
 
                 comments.add(comment);
                 commentsView.setAdapter(new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,comments));
+
             }
 
             @Override

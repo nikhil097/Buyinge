@@ -1,16 +1,12 @@
-package fodiee.thenick.com.zerseydemo.UI;
+package fodiee.thenick.com.SellIt.UI;
 
 import android.content.Intent;
-import android.os.NetworkOnMainThreadException;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,13 +18,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
-import java.util.jar.Attributes;
 
-import fodiee.thenick.com.zerseydemo.R;
+import fodiee.thenick.com.SellIt.Pojo.User;
+import fodiee.thenick.com.SellIt.R;
 
 public class SigniN extends AppCompatActivity {
 
@@ -36,6 +31,7 @@ public class SigniN extends AppCompatActivity {
     EditText mobileEt,otpEt;
     private String mVerificationId;
 
+    FirebaseDatabase firebaseDatabase;
 
     FirebaseAuth auth;
 
@@ -53,6 +49,8 @@ public class SigniN extends AppCompatActivity {
         login_btn.setEnabled(false);
 
         auth=FirebaseAuth.getInstance();
+
+        firebaseDatabase=FirebaseDatabase.getInstance();
 
         sendOtpButton.setOnClickListener(new View.OnClickListener() {
             @Override

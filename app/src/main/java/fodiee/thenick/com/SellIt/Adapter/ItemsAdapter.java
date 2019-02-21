@@ -1,4 +1,4 @@
-package fodiee.thenick.com.zerseydemo.Adapter;
+package fodiee.thenick.com.SellIt.Adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,13 +13,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.security.BasicPermission;
 import java.util.ArrayList;
 
-import javax.microedition.khronos.opengles.GL;
-
-import fodiee.thenick.com.zerseydemo.Pojo.Product;
-import fodiee.thenick.com.zerseydemo.R;
+import fodiee.thenick.com.SellIt.Pojo.Product;
+import fodiee.thenick.com.SellIt.R;
 
 public class ItemsAdapter extends BaseAdapter {
 

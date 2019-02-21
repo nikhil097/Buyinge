@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/app_background"
     android:layout_height="match_parent"
     tools:context=".UI.MainActivity">
 
@@ -32,13 +32,19 @@
         android:layout_width="70dp"
         android:layout_height="100dp"
         android:id="@+id/addProductFloatingButton"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/bottomSpaceView"
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
         android:src="@drawable/round_add_black_18dp"
         android:tint="@android:color/white"
         android:background="@mipmap/ic_launcher"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/bottomSpaceView"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/addProduct_btn"/>
 
 
 </RelativeLayout>
